@@ -1,0 +1,122 @@
+﻿@model WebApplication8.ViewModel.ItemViewModel
+
+@{
+    ViewBag.Title = "商品首頁";
+}
+
+<style>
+    body {
+        padding-top: 86px;
+    }
+    h3 {
+        padding-left: 135px;
+    }
+
+
+    #CreateArticleModal .modal-dialog {
+        border: 1px solid #fff;
+        border-radius: 20px;
+        padding: 10px;
+        background-color: #1b263b;
+        color: #fff;
+    }
+
+    #CreateArticleModal .modal-content {
+        background-color: unset;
+    }
+
+    #CreateArticleModal .form-control {
+        max-width: 250px !important;
+    }
+
+    .search-area .form-label {
+        word-break: keep-all;
+    }
+    
+</style>
+<h1 class=" text-center mt-3 mb-3">浪浪公告</h1>
+@using (Html.BeginForm("Index", "Item", new { Account = Model.Account}))
+{
+<div class="row bg-light mx-auto position-relative" style="max-width: 420px; border-radius: 20px;">
+    <div style="position: absolute; right: -232px; top: 40px;">
+        @if (User.Identity.IsAuthenticated)
+        {
+            @Ajax.ActionLink(" 新增浪浪 ", "Create", "Item", null, new AjaxOptions { UpdateTargetId = "CreateArticleModal", InsertionMode = InsertionMode.Replace },
+        new { @class = "btn btn-info", @data_toggle = "modal", @data_target = "#CreateArticleModal" })
+            <div class="modal fade" id="CreateArticleModal" tabindex="-1"
+                 role="dialog" aria-labelledby="CreateArticleModalLabel" ariahidden="true">
+            </div>
+        }
+        else
+        {
+
+        }
+    </div>
+    <div class="col-8 p-3">
+        <h3>搜尋條件</h3>
+        
+        <div class="d-flex align-items-center">
+            @Html.LabelFor(model => model.Search.Sanimal, new { @class = "col-xs-4 form-label" })
+            <div>
+                @Html.RadioButtonFor(model => model.Search.Sanimal, "狗")
+                @Html.Label("狗")
+            </div>
+            <div style="margin: 0 18px;">
+                @Html.RadioButtonFor(model => model.Search.Sanimal, "貓")
+                @Html.Label("貓")
+            </div>
+            <div>
+                @Html.RadioButtonFor(model => model.Search.Sanimal, "")
+                @Html.Label("不限")<br>
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            @Html.LabelFor(model => model.Search.Ssex, new { @class = "col-xs-4 form-label" })
+            <div>
+                @Html.RadioButtonFor(model => model.Search.Ssex, "公")
+                @Html.Label("公")
+            </div>
+            <div style="margin: 0 18px;">
+                @Html.RadioButtonFor(model => model.Search.Ssex, "母")
+                @Html.Label("母")
+            </div>
+            <div>
+                @Html.RadioButtonFor(model => model.Search.Ssex, "")
+                @Html.Label("不限")<br>
+            </div>
+        </div>
+        <div class="d-flex align-items-center search-area">
+            @Html.LabelFor(model => model.Search.Splace, new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.Search.Splace, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="col-4 p-3 d-flex align-items-center">
+        <div class="input-group-btn mx-auto">
+            <input class="btn btn-info" type="submit" value="搜尋 " />
+        </div>
+    </div>
+</div>
+}
+<div class="container pt-5">
+    <div class="row">
+        @if (!Model.IdList.Count.Equals(0))
+        {
+            int row = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(Model.IdList.Count) / 5));
+            for (int r = 0; r < row; r++)
+            {
+                for (int i = 5 * r; i < (r + 1) * 5; i++)
+                {
+                    if (i < Model.IdList.Count)
+                    {
+                        @Html.Partial("ItemBlock", Model.ItemBlock[i])
+                    }
+                }
+
+            }
+        }
+        else
+        {
+
+        }
+    </div>
+</div>

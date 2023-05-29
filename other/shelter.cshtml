@@ -1,0 +1,710 @@
+﻿@{
+    ViewBag.Title = "商品資料";
+}
+<html>
+<head>
+    <style type="text/css">
+        html, body {
+            height: 300px;
+            margin: 0;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+        body {
+            padding-top: 60px;
+            
+        }
+        #map {
+            width: 600px;
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="row bg-light mx-auto mt-5" style="max-width: 1024px;border-radius:20px;">
+        <div class="col-4 p-5" style="font-size: 14px;">
+
+            <table class="table table-striped">
+                <tr>
+                    <td>收容所</td>
+                </tr>
+                <tr>
+                    <td>新北市政府動物保護防疫處</td>
+                </tr>
+                <tr>
+                    <td>新北市板橋區公立動物之家</td>
+                </tr>
+                <tr>
+                    <td>新北市新店區公立動物之家</td>
+                </tr>
+                <tr>
+                    <td>新北市中和區公立動物之家</td>
+                </tr>
+                <tr>
+                    <td>新北市淡水區公立動物之家</td>
+                </tr>
+                <tr>
+                    <td>新北市瑞芳區公立動物之家</td>
+                </tr>
+                <tr>
+                    <td>新北市五股區公立動物之家</td>
+                </tr>
+                <tr>
+                    <td>新北市八里區公立動物之家</td>
+                </tr>
+                <tr>
+                    <td>新北市三芝區公立動物之家</td>
+                </tr>
+                <tr>
+                    <td>臺北市動物之家</td>
+                </tr>
+                <tr>
+                    <td>臺中市動物之家南屯園區</td>
+                </tr>
+                <tr>
+                    <td>臺中市動物之家后里園區</td>
+                </tr>
+                <tr>
+                    <td>臺南市動物之家灣裡站</td>
+                </tr>
+                <tr>
+                    <td>臺南市動物之家善化站</td>
+                </tr>
+                <tr>
+                    <td>高雄市壽山動物保護教育園區</td>
+                </tr>
+                <tr>
+                    <td>高雄市燕巢動物保護關愛園區</td>
+                </tr>
+                <tr>
+                    <td>桃園市動物保護教育園區</td>
+                </tr>
+                <tr>
+                    <td>宜蘭縣流浪動物中途之家</td>
+                </tr>
+                <tr>
+                    <td>新竹縣動物保護防疫所</td>
+                </tr>
+                <tr>
+                    <td>苗栗縣生態保育教育中心(動物收容所)</td>
+                </tr>
+                <tr>
+                    <td>彰化縣流浪狗中途之家</td>
+                </tr>
+                <tr>
+                    <td>南投縣公立動物收容所</td>
+                </tr>
+                <tr>
+                    <td>雲林縣流浪動物收容所</td>
+                </tr>
+                <tr>
+                    <td>嘉義縣動物保護教育園區</td>
+                </tr>
+                <tr>
+                    <td>屏東縣公立犬貓中途之家</td>
+                </tr>
+                <tr>
+                    <td>臺東縣動物收容中心</td>
+                </tr>
+                <tr>
+                    <td>花蓮縣狗貓躍動園區</td>
+                </tr>
+                <tr>
+                    <td>澎湖縣流浪動物收容中心</td>
+                </tr>
+                <tr>
+                    <td>基隆市寵物銀行</td>
+                </tr>
+                <tr>
+                    <td>新竹市動物保護教育園區</td>
+                </tr>
+                <tr>
+                    <td>嘉義市動物保護教育園區</td>
+                </tr>
+                <tr>
+                    <td>金門縣動物收容中心</td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="col-8 p-5">
+            <div id="map"></div>
+        </div>
+    </div>
+    <div>
+        <br>
+    </div>
+
+
+    <script type="text/javascript">
+        var map;
+        var a = { lat: 25.0040798, lng: 121.4603662 };
+        var b = { lat: 24.9951674, lng: 121.4482077 };
+        var c = { lat: 24.9271546, lng: 121.4908082 };
+        var d = { lat: 24.9756199, lng: 121.4887454 };
+        var e = { lat: 25.2099601, lng: 121.4303811 };
+        var f = { lat: 25.0759433, lng: 121.7997762 };
+        var g = { lat: 25.0776139, lng: 121.4157993 };
+        var h = { lat: 25.0876972, lng: 121.3982303 };
+        var i = { lat: 25.2268162, lng: 121.5382887 };
+        var j = { lat: 25.0604342, lng: 121.603348 };
+        var k = { lat: 24.1477191, lng: 120.57527 };
+        var l = { lat: 24.2863628, lng: 120.7095666 };
+        var m = { lat: 22.9367418, lng: 120.1944128 };
+        var n = { lat: 23.1487604, lng: 120.3316079 };
+        var o = { lat: 22.6369775, lng: 120.2779963 };
+        var p = { lat: 22.7926808, lng: 120.4046631 };
+        var q = { lat: 25.0084953, lng: 121.0277731 };
+        var r = { lat: 24.667123, lng: 121.831205 };
+        var s = { lat: 24.8284583, lng: 121.0150649 };
+        var t = { lat: 24.4996144, lng: 120.7940122 };
+        var u = { lat: 23.9692434, lng: 120.6197311 };
+        var v = { lat: 23.9058767, lng: 120.669823 };
+        var w = { lat: 23.698299, lng: 120.525938 };
+        var x = { lat: 23.5476324, lng: 120.505479 };
+        var y = { lat: 22.6502729, lng: 120.6043547 };
+        var z = { lat: 22.7195877, lng: 121.1009613 };
+        var aa = { lat: 23.8056717, lng: 121.4981116 };
+        var bb = { lat: 23.5522702, lng: 119.6271846 };
+        var cc = { lat: 25.1273599, lng: 121.6753247 };
+        var dd = { lat: 24.8327046, lng: 120.9196313 };
+        var ee = { lat: 23.4643236, lng: 120.468779 };
+        var ff = { lat: 24.4440957, lng: 118.4448038 };
+        var contentStringa = '<h6>新北市政府動物保護防疫處</h6><h6>220新北市板橋區四川路一段157巷2號</h6><a href="https://www.google.com/maps/place/%E6%96%B0%E5%8C%97%E5%B8%82%E6%94%BF%E5%BA%9C%E5%8B%95%E7%89%A9%E4%BF%9D%E8%AD%B7%E9%98%B2%E7%96%AB%E8%99%95/25.0040798,121.4603662,15z/data=!4m5!3m4!1s0x0:0xa3212f29ad9ea73!8m2!3d25.0040833!4d121.4603656" target="_blank">了解更多</a>';
+        var contentStringb = '<h6>新北市板橋區公立動物之家</h6><h6>220新北市板橋區板城路28-1號</h6><a href="https://www.google.com/maps/place/%E6%9D%BF%E6%A9%8B%E5%8B%95%E7%89%A9%E4%B9%8B%E5%AE%B6/24.9951674,121.446019,17z/data=!3m1!4b1!4m5!3m4!1s0x346802b48b6a6141:0x6d4b927a2eb17556!8m2!3d24.9951674!4d121.4482077" target="_blank">了解更多</a>';
+        var contentStringc = '<h6>新北市新店區公立動物之家</h6><h6>235安泰路新店區新北市231</h6><a href="https://www.google.com/maps/place/%E6%96%B0%E5%BA%97%E5%8B%95%E7%89%A9%E4%B9%8B%E5%AE%B6/25.0040634,121.3903258,12z/data=!4m9!1m2!2m1!1z5paw5YyX5biC5paw5bqX5Y2A5YWs56uL5YuV54mp5LmL5a62!3m5!1s0x34680377f90cbb15:0x30a002271fe4255e!8m2!3d24.9271546!4d121.4908082!15sCiTmlrDljJfluILmlrDlupfljYDlhaznq4vli5XniankuYvlrrZaLSIr5pawIOWMl-W4giDmlrDlupcg5Y2AIOWFrOeriyDli5Xniakg5LmLIOWutpIBDmFuaW1hbF9zaGVsdGVymgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVU5qZHpWeVVsRm5FQUXgAQA" target="_blank">了解更多</a>';
+        var contentStringd = '<h6>新北市中和區公立動物之家</h6><h6>235新北市中和區興南路三段100號</h6><a href="https://www.google.com/maps/place/%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E5%92%8C%E5%85%AC%E7%AB%8B%E5%8B%95%E7%89%A9%E4%B9%8B%E5%AE%B6/24.9756199,121.4865567,17z/data=!3m1!4b1!4m5!3m4!1s0x346802f5d2e281b7:0x3eca0042058caf54!8m2!3d24.9756199!4d121.4887454" target="_blank">了解更多</a>';
+        var contentStringe = '<h6>新北市淡水區公立動物之家</h6><h6>251新北市淡水區下圭柔山91-3號</h6><a href="https://www.google.com/maps/place/%E6%B7%A1%E6%B0%B4%E5%8B%95%E7%89%A9%E4%B9%8B%E5%AE%B6/25.2099601,121.4281924,17z/data=!3m1!4b1!4m5!3m4!1s0x3442ba96faf855d9:0xc5a7542b390693d4!8m2!3d25.2099601!4d121.4303811" target="_blank">了解更多</a>';
+        var contentStringf = '<h6>新北市瑞芳區公立動物之家</h6><h6>224新北市瑞芳區靜安路四段</h6><a href="https://www.google.com/maps/place/%E7%91%9E%E8%8A%B3%E6%B5%81%E6%B5%AA%E7%8A%AC%E6%94%B6%E5%AE%B9%E6%89%80/25.0759433,121.7975875,17z/data=!3m1!4b1!4m5!3m4!1s0x140ddab2826bfff3:0x47431b6abcf6d437!8m2!3d25.0759433!4d121.7997762" target="_blank">了解更多</a>';
+        var contentStringg = '<h6>新北市五股區公立動物之家</h6><h6>248新北市五股區外寮路9-9號</h6><a href="https://www.google.com/maps/place/%E4%BA%94%E8%82%A1%E5%8D%80%E5%85%AC%E7%AB%8B%E5%8B%95%E7%89%A9%E4%B9%8B%E5%AE%B6/25.0776139,121.4136106,17z/data=!3m1!4b1!4m5!3m4!1s0x3442a63fa11c1af3:0x49b166678f5d931f!8m2!3d25.0776139!4d121.4157993" target="_blank">了解更多</a>';
+        var contentStringh = '<h6>新北市八里區公立動物之家</h6><h6>249新北市八里區長坑道路36號</h6><a href="https://www.google.com/maps/place/%E6%96%B0%E5%8C%97%E5%B8%82%E5%85%AB%E9%87%8C%E5%8B%95%E7%89%A9%E4%B9%8B%E5%AE%B6/25.0877004,121.3959829,17z/data=!3m1!4b1!4m5!3m4!1s0x3442a42f23bc2edb:0xbca31b7dc134d0e3!8m2!3d25.0876972!4d121.3982303" target="_blank">了解更多</a>';
+        var contentStringi = '<h6>新北市三芝區公立動物之家</h6><h6>252新北市三芝區青山路號</h6><a href="https://www.google.com/maps/place/%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%89%E8%8A%9D%E5%8D%80%E5%85%AC%E7%AB%8B%E5%8B%95%E7%89%A9%E4%B9%8B%E5%AE%B6/25.2268162,121.5361,17z/data=!3m1!4b1!4m5!3m4!1s0x3442b351d8c0cef5:0x4563d4d5f0d2393a!8m2!3d25.2268162!4d121.5382887" target="_blank">了解更多</a>';
+        var contentStringj = '<h6>臺北市動物之家</h6><h6>114台北市內湖區安美街191號</h6><a href="https://www.google.com/maps/place/%E5%8F%B0%E5%8C%97%E5%B8%82%E5%8B%95%E7%89%A9%E4%B9%8B%E5%AE%B6/25.0604342,121.6011593,17z/data=!3m1!4b1!4m5!3m4!1s0x3442aca17b1bb197:0x5bb32ef0b85dc32f!8m2!3d25.0604342!4d121.603348" target="_blank">了解更多</a>';
+        var contentStringk = '<h6>臺中市動物之家南屯園區</h6><h6>408台中市南屯區中台路601號</h6><a href="https://www.google.com/maps/place/%E8%87%BA%E4%B8%AD%E5%B8%82%E5%8B%95%E7%89%A9%E4%B9%8B%E5%AE%B6%E5%8D%97%E5%B1%AF%E5%9C%92%E5%8D%80/24.1477184,120.5730829,17z/data=!3m1!4b1!4m5!3m4!1s0x34693e54c06897bd:0x5a12331be91055df!8m2!3d24.1477191!4d120.57527" target="_blank">了解更多</a>';
+        var contentStringl = '<h6>臺中市動物之家后里園區</h6><h6>421台中市后里區堤防路370號</h6><a href="https://www.google.com/maps/place/%E8%87%BA%E4%B8%AD%E5%B8%82%E5%8B%95%E7%89%A9%E4%B9%8B%E5%AE%B6%E5%90%8E%E9%87%8C%E5%9C%92%E5%8D%80/24.2863873,120.7073772,17z/data=!3m1!4b1!4m5!3m4!1s0x3469118e69b9e5c9:0x212a7fe9b1f5b5e7!8m2!3d24.2863628!4d120.7095666" target="_blank">了解更多</a>';
+        var contentStringm = '<h6>臺南市動物之家灣裡站</h6><h6>702台南市南區萬年路580巷92號</h6><a href="https://www.google.com/maps/place/%E8%87%BA%E5%8D%97%E5%B8%82%E5%8B%95%E7%89%A9%E4%B9%8B%E5%AE%B6%E7%81%A3%E8%A3%A1%E7%AB%99/22.9367418,120.1922241,17z/data=!3m1!4b1!4m5!3m4!1s0x346e7507cfb2397d:0xfa112834d169f5f5!8m2!3d22.9367418!4d120.1944128" target="_blank">了解更多</a>';
+        var contentStringn = '<h6>臺南市動物之家善化站</h6><h6>741台南市善化區119號東昌里</h6><a href="https://www.google.com/maps/place/%E5%8F%B0%E5%8D%97%E5%B8%82%E5%8B%95%E7%89%A9%E4%B9%8B%E5%AE%B6%E5%96%84%E5%8C%96%E7%AB%99/23.1487511,120.3294545,17z/data=!3m1!4b1!4m5!3m4!1s0x346e7cc7d4af8101:0x6a65d35c68ed696e!8m2!3d23.1487604!4d120.3316079" target="_blank">了解更多</a>';
+        var contentStringo = '<h6>高雄市壽山動物保護教育園區</h6><h6>804高雄市鼓山區萬壽路350號</h6><a href="https://www.google.com/maps/place/%E9%AB%98%E9%9B%84%E5%B8%82%E5%8B%95%E7%89%A9%E4%BF%9D%E8%AD%B7%E6%95%99%E8%82%B2%E5%9C%92%E5%8D%80/22.6369775,120.2758076,17z/data=!3m1!4b1!4m5!3m4!1s0x346e046b8890aa7b:0x9cda03a24f659bf2!8m2!3d22.6369775!4d120.2779963" target="_blank">了解更多</a>';
+        var contentStringp = '<h6>高雄市燕巢動物保護關愛園區</h6><h6>824高雄市燕巢區師大路98號</h6><a href="https://www.google.com/maps/place/%E9%AB%98%E9%9B%84%E5%B8%82%E7%87%95%E5%B7%A2%E5%8B%95%E7%89%A9%E6%94%B6%E5%AE%B9%E6%89%80/22.7926808,120.4024744,17z/data=!3m1!4b1!4m5!3m4!1s0x346e13b97ce92447:0xe36bfe1dd9e72a23!8m2!3d22.7926808!4d120.4046631" target="_blank">了解更多</a>';
+        var contentStringq = '<h6>桃園市動物保護教育園區</h6><h6>327桃園市新屋區藻礁路1668號</h6><a href="https://www.google.com/maps/place/%E6%A1%83%E5%9C%92%E5%B8%82%E5%8B%95%E7%89%A9%E4%BF%9D%E8%AD%B7%E6%95%99%E8%82%B2%E5%9C%92%E5%8D%80/25.0084953,121.0255844,17z/data=!3m1!4b1!4m5!3m4!1s0x34682edc31fc5a3b:0xc28f9a6341de1e6f!8m2!3d25.0084953!4d121.0277731" target="_blank">了解更多</a>';
+        var contentStringr = '<h6>宜蘭縣流浪動物中途之家</h6><h6>268宜蘭縣五結鄉利寶路60號</h6><a href="https://www.google.com/maps/place/%E5%AE%9C%E8%98%AD%E7%B8%A3%E6%B5%81%E6%B5%AA%E5%8B%95%E7%89%A9%E4%B8%AD%E9%80%94%E4%B9%8B%E5%AE%B6/24.667123,121.8290163,17z/data=!3m1!4b1!4m5!3m4!1s0x3467ef4ad1a2642f:0x971efb12e66ca721!8m2!3d24.667123!4d121.831205" target="_blank">了解更多</a>';
+        var contentStrings = '<h6>新竹縣公立動物收容所</h6><h6>302新竹縣竹北市縣政五街192號</h6><a href="https://www.google.com/maps/place/%E6%96%B0%E7%AB%B9%E7%B8%A3%E5%85%AC%E7%AB%8B%E5%8B%95%E7%89%A9%E6%94%B6%E5%AE%B9%E6%89%80/24.8284583,120.9450271,13z/data=!4m9!1m2!2m1!1z5paw56u557ij5YuV54mp5L-d6K236Ziy55ar5omA!3m5!1s0x346836ec159effef:0x779bfdb49f262544!8m2!3d24.8284583!4d121.0150649!15sCh7mlrDnq7nnuKPli5Xniankv53orbfpmLLnlqvmiYBaJSIj5paw56u5IOe4oyDli5Xniakg5L-d6K23IOmYsueWqyDmiYCSAQ5hbmltYWxfc2hlbHRlcuABAA" target="_blank">了解更多</a>';
+        var contentStringt = '<h6>苗栗縣生態保育教育中心(動物收容所)</h6><h6>366苗栗縣銅鑼鄉朝陽村6鄰朝北55-1號</h6><a href="https://www.google.com/maps/place/%E8%8B%97%E6%A0%97%E7%B8%A3%E7%94%9F%E6%85%8B%E4%BF%9D%E8%82%B2%E6%95%99%E8%82%B2%E4%B8%AD%E5%BF%83+(%E8%8B%97%E6%A0%97%E7%B8%A3%E5%8B%95%E7%89%A9%E6%94%B6%E5%AE%B9)/24.4996144,120.7918235,17z/data=!3m1!4b1!4m5!3m4!1s0x3469a9f29b99e8df:0xd1f2514d400ed9fb!8m2!3d24.4996144!4d120.7940122" target="_blank">了解更多</a>';
+        var contentStringu = '<h6>彰化縣流浪狗中途之家</h6><h6>510彰化縣員林市阿寶巷426號芬園鄉大彰路一段875巷導航請走</h6><a href="https://www.google.com/maps/place/%E5%BD%B0%E5%8C%96%E7%B8%A3%E6%B5%81%E6%B5%AA%E7%8B%97%E4%B8%AD%E9%80%94%E4%B9%8B%E5%AE%B6(%E5%B0%8E%E8%88%AA%E8%AB%8B%E8%B5%B0%E8%8A%AC%E5%9C%92%E9%84%89%E5%A4%A7%E5%BD%B0%E8%B7%AF%E4%B8%80%E6%AE%B5875%E5%B7%B7%E7%9B%B4%E8%B5%B0%E5%88%B0%E5%BA%95%EF%BC%89/23.9692434,120.6175424,17z/data=!3m1!4b1!4m5!3m4!1s0x346930d72068f0d5:0x6426b5ba8498769a!8m2!3d23.9692434!4d120.6197311" target="_blank">了解更多</a>';
+        var contentStringv = '<h6>南投縣公立動物收容所</h6><h6>540南投縣南投市嶺興路36-1號</h6><a href="https://www.google.com/maps/place/%E5%8D%97%E6%8A%95%E7%B8%A3%E5%85%AC%E7%AB%8B%E5%8B%95%E7%89%A9%E6%94%B6%E5%AE%B9%E6%89%80/23.9058767,120.6676343,17z/data=!3m1!4b1!4m5!3m4!1s0x3469322a4a4115a5:0x1207480eb5c9657b!8m2!3d23.9058767!4d120.669823" target="_blank">了解更多</a>';
+        var contentStringw = '<h6>雲林縣動植物防疫所</h6><h6>640雲林縣斗六市雲林路二段517號</h6><a href="https://www.google.com/maps/place/%E9%9B%B2%E6%9E%97%E7%B8%A3%E5%8B%95%E6%A4%8D%E7%89%A9%E9%98%B2%E7%96%AB%E6%89%80/23.698299,120.2457866,11z/data=!4m9!1m2!2m1!1z6Zuy5p6X57ij5rWB5rWq5YuV54mp5pS25a655omA!3m5!1s0x346eb7e238f509bf:0x771b0874cb27d5a1!8m2!3d23.698299!4d120.525938!15sCh7pm7LmnpfnuKPmtYHmtarli5XnianmlLblrrnmiYCSAQpnb3Zlcm5tZW504AEA" target="_blank">了解更多</a>';
+        var contentStringx = '<h6>嘉義縣動物保護教育園區</h6><h6>嘉義縣民雄鄉松山村後山仔37之2號</h6><a href="https://www.google.com/maps/place/%E5%98%89%E7%BE%A9%E7%B8%A3%E5%8B%95%E7%89%A9%E4%BF%9D%E8%AD%B7%E6%95%99%E8%82%B2%E5%9C%92%E5%8D%80(%E5%98%89%E7%BE%A9%E7%B8%A3%E6%94%B6%E5%AE%B9%E6%89%80)/23.5475468,120.5032856,17z/data=!3m1!4b1!4m5!3m4!1s0x346ebf985a0fec3f:0x20fc05f0768f3455!8m2!3d23.5476324!4d120.505479" target="_blank">了解更多</a>';
+        var contentStringy = '<h6>屏東縣公立犬貓中途之家</h6><h6>屏東縣內埔鄉學府路1號(屏東科技大學內)</h6><a href="https://www.google.com/maps/place/%E5%9C%8B%E7%AB%8B%E5%B1%8F%E6%9D%B1%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%B8%E4%BF%9D%E8%82%B2%E9%A1%9E%E9%87%8E%E7%94%9F%E5%8B%95%E7%89%A9%E6%94%B6%E5%AE%B9%E4%B8%AD%E5%BF%83(%E8%AB%8B%E5%B0%8E%E8%88%AA%E5%B1%8F%E7%A7%91%E5%A4%A7%E7%94%B1%E6%AD%A3%E9%96%80%E9%80%B2%E5%85%A5)/22.6502729,120.3242033,11z/data=!4m9!1m2!2m1!1z5bGP5p2x57ij5YWs56uL54qs6LKT5Lit6YCU5LmL5a62!3m5!1s0x346e3cadfd5323cf:0x67a38b6d705abd18!8m2!3d22.6502729!4d120.6043547!15sCiHlsY_mnbHnuKPlhaznq4vniqzospPkuK3pgJTkuYvlrraSAQ5hbmltYWxfc2hlbHRlcuABAA" target="_blank">了解更多</a>';
+        var contentStringz = '<h6>臺東縣動物收容中心</h6><h6>950台東縣台東市中華路四段999巷600號之1號</h6><a href="https://www.google.com/maps/place/%E8%87%BA%E6%9D%B1%E7%B8%A3%E6%B5%81%E6%B5%AA%E5%8B%95%E7%89%A9%E6%94%B6%E5%AE%B9%E4%B8%AD%E5%BF%83/22.7441452,121.0922738,14z/data=!4m9!1m2!2m1!1z6Ie65p2x57ij5YuV54mp5pS25a655Lit5b-D!3m5!1s0x346fb814c871a059:0x478be79883a37aac!8m2!3d22.7195877!4d121.1009613!15sChvoh7rmnbHnuKPli5XnianmlLblrrnkuK3lv4NaIiIg6Ie6IOadsSDnuKMg5YuV54mpIOaUtuWuuSDkuK3lv4OSAQ5hbmltYWxfc2hlbHRlcpoBI0NoWkRTVWhOTUc5blMwVkpRMEZuU1VSMUxWQjViVWxCRUFF4AEA" target="_blank">了解更多</a>';
+        var contentStringaa = '<h6>花蓮縣狗貓躍動園區</h6><h6>975花蓮縣鳳林鎮永豐路255號</h6><a href="https://www.google.com/maps/place/%E8%8A%B1%E8%93%AE%E7%B8%A3%E7%8B%97%E8%B2%93%E8%BA%8D%E5%8B%95%E5%9C%92%E5%8D%80/23.8056717,121.4959229,17z/data=!3m1!4b1!4m5!3m4!1s0x3468a045f622f7ef:0xf4082d6121f3ab85!8m2!3d23.8056717!4d121.4981116" target="_blank">了解更多</a>';
+        var contentStringbb = '<h6>澎湖縣流浪動物收容中心</h6><h6>澎湖縣馬公市880260號</h6><a href="https://www.google.com/maps/place/%E6%BE%8E%E6%B9%96%E7%B8%A3%E6%B5%81%E6%B5%AA%E5%8B%95%E7%89%A9%E6%94%B6%E5%AE%B9%E4%B8%AD%E5%BF%83/23.5522702,119.6249959,17z/data=!3m1!4b1!4m5!3m4!1s0x346c454100000001:0xc9ee1d79f950d348!8m2!3d23.5522702!4d119.6271846" target="_blank">了解更多</a>';
+        var contentStringcc = '<h6>基隆市寵物銀行</h6><h6>206基隆市七堵區大華三路45-12號</h6><a href="https://www.google.com/maps/place/%E5%9F%BA%E9%9A%86%E5%B8%82%E5%AF%B5%E7%89%A9%E9%8A%80%E8%A1%8C/25.1273599,121.6731359,17z/data=!3m1!4b1!4m5!3m4!1s0x345d527ff3565919:0xfe7f55af42bdf32f!8m2!3d25.1273599!4d121.6753247" target="_blank">了解更多</a>';
+        var contentStringdd = '<h6>新竹市動物保護教育園區</h6><h6>300新竹市北區海濱路250號</h6><a href="https://www.google.com/maps/place/%E6%96%B0%E7%AB%B9%E5%B8%82%E5%8B%95%E7%89%A9%E4%BF%9D%E8%AD%B7%E6%95%99%E8%82%B2%E5%9C%92%E5%8D%80/24.8327046,120.9174426,17z/data=!3m1!4b1!4m5!3m4!1s0x3468351f76af04c5:0x84e865d9895a46f5!8m2!3d24.8327046!4d120.9196313" target="_blank">了解更多</a>';
+        var contentStringee = '<h6>嘉義市動物保護教育園區</h6><h6>600嘉義市東區彌陀路31號</h6><a href="https://www.google.com/maps/place/%E5%98%89%E7%BE%A9%E5%B8%82%E5%8B%95%E7%89%A9%E4%BF%9D%E8%AD%B7%E6%95%99%E8%82%B2%E5%9C%92%E5%8D%80/23.4643101,120.4665979,17z/data=!3m1!4b1!4m5!3m4!1s0x346e94447c05e895:0x45d221f8f1c0c3a7!8m2!3d23.4643236!4d120.468779" target="_blank">了解更多</a>';
+        var contentStringff = '<h6>金門縣動物收容中心</h6><h6>891金門縣金湖鎮裕民農莊20號</h6><a href="https://www.google.com/maps/place/%E9%87%91%E9%96%80%E7%B8%A3%E5%8B%95%E6%A4%8D%E7%89%A9%E9%98%B2%E7%96%AB%E6%89%80/24.4440957,118.4426151,17z/data=!3m1!4b1!4m5!3m4!1s0x3414a51f46146fc5:0xb1d92ea41a7c6eb5!8m2!3d24.4440957!4d118.4448038" target="_blank">了解更多</a>';
+
+
+        function initMap() {
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 23.8765426, lng: 120.6615226 },
+                zoom: 8
+            });
+
+            var markera = new google.maps.Marker({
+
+                position: a,
+                map: map,
+
+            });
+            var infowindowa = new google.maps.InfoWindow({
+                content: contentStringa,
+                position: a,
+
+            });
+            markera.addListener('click', function () {
+
+                    infowindowa.open(map, markera);
+
+            });
+
+            var markerb = new google.maps.Marker({
+                position: b,
+                map: map,
+
+            });
+            var infowindowb = new google.maps.InfoWindow({
+                content: contentStringb,
+                position: b,
+
+            });
+            markerb.addListener('click', function () {
+
+                infowindowb.open(map, markerb);
+
+            });
+
+            var markerc = new google.maps.Marker({
+                position: c,
+                map: map,
+
+            });
+            var infowindowc = new google.maps.InfoWindow({
+                content: contentStringc,
+                position: c,
+
+            });
+            markerc.addListener('click', function () {
+
+                infowindowc.open(map, markerc);
+
+            });
+
+            var markerd = new google.maps.Marker({
+                position: d,
+                map: map,
+
+            });
+            var infowindowd = new google.maps.InfoWindow({
+                content: contentStringd,
+                position: d,
+
+            });
+            markerd.addListener('click', function () {
+
+                infowindowd.open(map, markerd);
+
+            });
+
+            var markere = new google.maps.Marker({
+                position: e,
+                map: map,
+
+            });
+            var infowindowe = new google.maps.InfoWindow({
+                content: contentStringe,
+                position: e,
+
+            });
+            markere.addListener('click', function () {
+
+                infowindowe.open(map, markere);
+
+            });
+
+            var markerf = new google.maps.Marker({
+                position: f,
+                map: map,
+
+            });
+            var infowindowf = new google.maps.InfoWindow({
+                content: contentStringf,
+                position: f,
+
+            });
+            markerf.addListener('click', function () {
+
+                infowindowf.open(map, markerf);
+
+            });
+            var markerg = new google.maps.Marker({
+                position: g,
+                map: map,
+
+            });
+            var infowindowg = new google.maps.InfoWindow({
+                content: contentStringg,
+                position: g,
+
+            });
+            markerg.addListener('click', function () {
+
+                infowindowg.open(map, markerg);
+
+            });
+            var markerh = new google.maps.Marker({
+                position: h,
+                map: map,
+
+            });
+            var infowindowh = new google.maps.InfoWindow({
+                content: contentStringh,
+                position: h,
+
+            });
+            markerh.addListener('click', function () {
+
+                infowindowh.open(map, markerh);
+
+            });
+            var markeri = new google.maps.Marker({
+                position: i,
+                map: map,
+
+            });
+            var infowindowi = new google.maps.InfoWindow({
+                content: contentStringi,
+                position: i,
+
+            });
+            markeri.addListener('click', function () {
+
+                infowindowi.open(map, markeri);
+
+            });
+            var markerj = new google.maps.Marker({
+                position: j,
+                map: map,
+
+            });
+            var infowindowj = new google.maps.InfoWindow({
+                content: contentStringj,
+                position: j,
+
+            });
+            markerj.addListener('click', function () {
+
+                infowindowj.open(map, markerj);
+
+            });
+            var markerk = new google.maps.Marker({
+                position: k,
+                map: map,
+
+            });
+            var infowindowk = new google.maps.InfoWindow({
+                content: contentStringk,
+                position: k,
+
+            });
+            markerk.addListener('click', function () {
+
+                infowindowk.open(map, markerk);
+
+            });
+            var markerl = new google.maps.Marker({
+                position: l,
+                map: map,
+
+            });
+            var infowindowl = new google.maps.InfoWindow({
+                content: contentStringl,
+                position: l,
+
+            });
+            markerl.addListener('click', function () {
+
+                infowindowl.open(map, markerl);
+
+            });
+            var markerm = new google.maps.Marker({
+                position: m,
+                map: map,
+
+            });
+            var infowindowm = new google.maps.InfoWindow({
+                content: contentStringm,
+                position: m,
+
+            });
+            markerm.addListener('click', function () {
+
+                infowindowm.open(map, markerm);
+
+            });
+            var markern = new google.maps.Marker({
+                position: n,
+                map: map,
+
+            });
+            var infowindown = new google.maps.InfoWindow({
+                content: contentStringn,
+                position: n,
+
+            });
+            markern.addListener('click', function () {
+
+                infowindown.open(map, markern);
+
+            });
+            var markero = new google.maps.Marker({
+                position: o,
+                map: map,
+
+            });
+            var infowindowo = new google.maps.InfoWindow({
+                content: contentStringo,
+                position: o,
+
+            });
+            markero.addListener('click', function () {
+
+                infowindowo.open(map, markero);
+
+            });
+            var markerp = new google.maps.Marker({
+                position: p,
+                map: map,
+
+            });
+            var infowindowp = new google.maps.InfoWindow({
+                content: contentStringp,
+                position: p,
+
+            });
+            markerp.addListener('click', function () {
+
+                infowindowp.open(map, markerp);
+
+            });
+            var markerq = new google.maps.Marker({
+                position: q,
+                map: map,
+
+            });
+            var infowindowq = new google.maps.InfoWindow({
+                content: contentStringq,
+                position: q,
+
+            });
+            markerq.addListener('click', function () {
+
+                infowindowq.open(map, markerq);
+
+            });
+            var markerr = new google.maps.Marker({
+                position: r,
+                map: map,
+
+            });
+            var infowindowr = new google.maps.InfoWindow({
+                content: contentStringr,
+                position: r,
+
+            });
+            markerr.addListener('click', function () {
+
+                infowindowr.open(map, markerr);
+
+            });
+            var markers = new google.maps.Marker({
+                position: s,
+                map: map,
+
+            });
+            var infowindows = new google.maps.InfoWindow({
+                content: contentStrings,
+                position: s,
+
+            });
+            markers.addListener('click', function () {
+
+                infowindows.open(map, markers);
+
+            });
+            var markert = new google.maps.Marker({
+                position: t,
+                map: map,
+
+            });
+            var infowindowt = new google.maps.InfoWindow({
+                content: contentStringt,
+                position: t,
+
+            });
+            markert.addListener('click', function () {
+
+                infowindowt.open(map, markert);
+
+            });
+            var markeru = new google.maps.Marker({
+                position: u,
+                map: map,
+
+            });
+            var infowindowu = new google.maps.InfoWindow({
+                content: contentStringu,
+                position: u,
+
+            });
+            markeru.addListener('click', function () {
+
+                infowindowu.open(map, markeru);
+
+            });
+            var markerv = new google.maps.Marker({
+                position: v,
+                map: map,
+
+            });
+            var infowindowv = new google.maps.InfoWindow({
+                content: contentStringv,
+                position: v,
+
+            });
+            markerv.addListener('click', function () {
+
+                infowindowv.open(map, markerv);
+
+            });
+            var markerw = new google.maps.Marker({
+                position: w,
+                map: map,
+
+            });
+            var infowindoww = new google.maps.InfoWindow({
+                content: contentStringw,
+                position: w,
+
+            });
+            markerw.addListener('click', function () {
+
+                infowindoww.open(map, markerw);
+
+            });
+            var markerx = new google.maps.Marker({
+                position: x,
+                map: map,
+
+            });
+            var infowindowx = new google.maps.InfoWindow({
+                content: contentStringx,
+                position: x,
+
+            });
+            markerx.addListener('click', function () {
+
+                infowindowx.open(map, markerx);
+
+            });
+            var markery = new google.maps.Marker({
+                position: y,
+                map: map,
+
+            });
+            var infowindowy = new google.maps.InfoWindow({
+                content: contentStringy,
+                position: y,
+
+            });
+            markery.addListener('click', function () {
+
+                infowindowy.open(map, markery);
+
+            });
+            var markerz = new google.maps.Marker({
+                position: z,
+                map: map,
+
+            });
+            var infowindowz = new google.maps.InfoWindow({
+                content: contentStringz,
+                position: z,
+
+            });
+            markerz.addListener('click', function () {
+
+                infowindowz.open(map, markerz);
+
+            });
+            var markeraa = new google.maps.Marker({
+                position: aa,
+                map: map,
+
+            });
+            var infowindowaa = new google.maps.InfoWindow({
+                content: contentStringaa,
+                position: aa,
+
+            });
+            markeraa.addListener('click', function () {
+
+                infowindowaa.open(map, markeraa);
+
+            });
+            var markerbb = new google.maps.Marker({
+                position: bb,
+                map: map,
+
+            });
+            var infowindowbb = new google.maps.InfoWindow({
+                content: contentStringbb,
+                position: bb,
+
+            });
+            markerbb.addListener('click', function () {
+
+                infowindowbb.open(map, markerbb);
+
+            });
+            var markercc = new google.maps.Marker({
+                position: cc,
+                map: map,
+
+            });
+            var infowindowcc = new google.maps.InfoWindow({
+                content: contentStringcc,
+                position: cc,
+
+            });
+            markercc.addListener('click', function () {
+
+                infowindowcc.open(map, markercc);
+
+            });
+            var markerdd = new google.maps.Marker({
+                position: dd,
+                map: map,
+
+            });
+            var infowindowdd = new google.maps.InfoWindow({
+                content: contentStringdd,
+                position: dd,
+
+            });
+            markerdd.addListener('click', function () {
+
+                infowindowdd.open(map, markerdd);
+
+            });
+            var markeree = new google.maps.Marker({
+                position: ee,
+                map: map,
+
+            });
+            var infowindowee = new google.maps.InfoWindow({
+                content: contentStringee,
+                position: ee,
+
+            });
+            markeree.addListener('click', function () {
+
+                infowindowee.open(map, markeree);
+
+            });
+            var markerff = new google.maps.Marker({
+                position: ff,
+                map: map,
+
+            });
+            var infowindowff = new google.maps.InfoWindow({
+                content: contentStringff,
+                position: ff,
+
+            });
+            markerff.addListener('click', function () {
+
+                infowindowff.open(map, markerff);
+
+            });
+
+        }
+
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrDGiYuX0pk1Lq232XmQYHM_dCRJfkMPo&callback=initMap">
+    </script>
+</body>
+</html>

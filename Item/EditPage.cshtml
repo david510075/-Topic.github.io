@@ -1,0 +1,137 @@
+﻿@model WebApplication8.Models.Item
+
+<script src="~/jQuery/Article/Article.js"></script>
+<!--
+<input type="file" id="uploadImg" onchange="xmTanUploadImg(this)">
+<img src="" alt="" id="selectImg">
+<a href="javascript:void()" download="picture.jpg" id="xmTanDownload">點此下載</a>
+
+<script>
+    function xmTanUploadImg(obj) {
+        var file = obj.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {    //成功讀取檔案
+            var img = document.getElementById("selectImg");
+            img.src = e.target.result;   //或 img.src = this.result / e.target == this
+
+            //實現點選下載圖片功能
+            var xmTanDownload = document.getElementById("xmTanDownload");
+            xmTanDownload.setAttribute("href", e.target.result);  //給a標籤設定href
+        };
+    }
+</script>
+-->
+<div id="current_date">
+    <script>
+        var today = new Date();
+        var todayy = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        var ddd = @Model.date.Day;
+        var mmm = @Model.date.Month;
+        var yyyyy = @Model.date.Year;
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+        if (ddd < 10) {
+            ddd = '0' + ddd
+        }
+        if (mmm < 10) {
+            mmm = '0' + mmm
+        }
+        today = yyyy + '-' + mm + '-' + dd;
+        todayy = yyyyy + '-' + mmm + '-' + ddd;
+        document.getElementById("datefield").setAttribute("max", today);
+        document.getElementById("datefield").setAttribute("value", todayy);
+    </script>
+</div>
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="form-horizontal">
+                <h3 class="modal-title">
+                    修改動物資訊
+                </h3>
+                @using (Html.BeginForm("EditPage", "Item", new { Id = Model.Id }, FormMethod.Post, null))
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Account, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Model.Account
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.animal, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.RadioButtonFor(model => model.animal, "狗")
+                            @Html.Label("狗")
+                            @Html.RadioButtonFor(model => model.animal, "貓")
+                            @Html.Label("貓")
+                            @Html.ValidationMessageFor(model => model.animal, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Sex, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.RadioButtonFor(model => model.Sex, "公")
+                            @Html.Label("公")
+                            @Html.RadioButtonFor(model => model.Sex, "母")
+                            @Html.Label("母")
+                            @Html.ValidationMessageFor(model => model.Sex, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.date, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.TextBoxFor(model => model.date, new { type = "date", id = "datefield" })
+                            @Html.ValidationMessageFor(model => model.date, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Variety, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.TextBoxFor(model => model.Variety, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Variety, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Color, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.TextBoxFor(model => model.Color, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Color, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Place, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.TextBoxFor(model => model.Place, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Place, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Phone, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Remark, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.TextAreaFor(model => model.Remark, new { @class = "form-control" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input class="btn btn-primary" id="editBtn" type="button" value=" 修改動物資訊 " />
+            <input class="btn btn-danger" onclick="close_modal();" type="button" value=" 取消 " />
+        </div>
+    </div>
+</div>

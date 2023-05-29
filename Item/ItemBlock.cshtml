@@ -1,0 +1,30 @@
+﻿@model WebApplication8.Models.ItemDetailViewModel
+
+<style>
+    .font-size-24 {
+        font-size: 24px;
+    }
+</style>
+
+<div class="col-6 mb-3">
+    <!-- 外層框 -->
+    <div class="row mx-auto bg-light p-3 border" style="border-radius: 20px;">
+        <!-- 左邊圖片 -->
+        <div class="col-6">
+            <div class="mx-auto d-flex align-items-center border shadow w-100 h-100 bg-white" style="border-radius: 20px;">
+                <img style=" max-width: 200px; max-height: 220px;" class="mx-auto" src="@Html.Encode(Url.Content("~/Upload/" + Model.Data.Image))">
+            </div>
+        </div>
+        <!-- 右邊文字 -->
+        <div class="col-6 p-3 border" style="border-radius: 20px;">
+            <div>物種：@Html.Label(Model.Data.animal)</div>
+            <div>性別：@Html.Label(Model.Data.Sex)</div>
+            <div>品種：@Html.Label(Model.Data.Variety) </div>
+            <div>出沒地點：@Html.Label(Model.Data.Place) </div>
+            <hr>
+            <div class="mt-3">
+                @Html.ActionLink("了解更多", "Item", new { id = Model.Data.Id }, new { @class = "btn btn-info" })
+            </div>
+        </div>
+    </div>
+</div>

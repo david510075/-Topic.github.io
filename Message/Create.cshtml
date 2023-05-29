@@ -1,0 +1,21 @@
+﻿@model WebApplication8.Models.Message
+<script src="~/jQuery/Article/ArticleList.js"></script>
+@using (Ajax.BeginForm("Add", "Message", new { P_Id = ViewData["P_Id"] },
+ new AjaxOptions
+ {
+     InsertionMode = InsertionMode.Replace,
+     UpdateTargetId = "MessageList"
+ }, new { }))
+{
+    <table>
+        <tr>
+            <td>
+                @Html.TextBoxFor(model => model.Content, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Content, null, new { @class = "label label-danger" })
+            </td>
+            <td>
+                <input id="createMessage" class="btn btn-info" type="submit" value=" 留言 " />
+            </td>
+        </tr>
+    </table>
+}

@@ -1,0 +1,119 @@
+﻿@model WebApplication8.ViewModel.ItemCreateViewModel
+
+<script src="~/jQuery/Article/ArticleList.js"></script>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="form-horizontal">
+                @using (Html.BeginForm("Create", "Item", new { }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {<h3 class="modal-title">
+                        新增浪浪
+                    </h3>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NewData.animal, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.RadioButtonFor(model => model.NewData.animal, "狗")
+                            @Html.Label("狗")
+                            @Html.RadioButtonFor(model => model.NewData.animal, "貓")
+                            @Html.Label("貓")
+                            @Html.ValidationMessageFor(model => model.NewData.animal, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NewData.Sex, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.RadioButtonFor(model => model.NewData.Sex, "公")
+                            @Html.Label("公")
+                            @Html.RadioButtonFor(model => model.NewData.Sex, "母")
+                            @Html.Label("母")
+                            @Html.ValidationMessageFor(model => model.NewData.Sex, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NewData.date, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.TextBoxFor(model => model.NewData.date, new { type = "date", id = "datefield" })
+                            @Html.ValidationMessageFor(model => model.NewData.date, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NewData.Variety, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.TextBoxFor(model => model.NewData.Variety, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.NewData.Variety, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NewData.Color, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.TextBoxFor(model => model.NewData.Color, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.NewData.Color, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NewData.Place, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.TextBoxFor(model => model.NewData.Place, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.NewData.Place, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NewData.Phone, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.TextBoxFor(model => model.NewData.Phone, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NewData.Remark, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.TextAreaFor(model => model.NewData.Remark, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ItemImage, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.TextBoxFor(model => model.ItemImage, new { type = "file", id = "uploadImg", onchange = "xmTanUploadImg(this)" })
+                            <img src="" alt="" id="selectImg" width="50%">
+                            @Html.ValidationMessageFor(model => model.ItemImage, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <input class="btn btn-primary" id="createBtn" type="button" value=" 新增浪浪 "  />
+            <input class="btn btn-danger" type="button" value=" 取消 " onclick="close_modal();" />
+        </div>
+    </div>
+</div>
+
+<div id="current_date">
+    <script>
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("datefield").setAttribute("max", today);
+    </script>
+    <script>
+        function xmTanUploadImg(obj) {
+            var file = obj.files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function (e) {    //成功讀取檔案
+                var img = document.getElementById("selectImg");
+                img.src = e.target.result;   //或 img.src = this.result / e.target == this
+
+            };
+        }
+    </script>
+</div>

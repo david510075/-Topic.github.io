@@ -1,0 +1,27 @@
+﻿
+<style>
+    div{
+        padding-top:7px;
+    }
+    #MessageCreate {
+        padding-top: 15px;
+        float: right;
+    }
+</style>
+
+<div id="MessageCreate">
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.Action("Create", new { P_Id = ViewData["P_Id"] })
+    }
+    else
+    {
+        <text> 要留言請先 </text>
+        @Html.ActionLink(" 登入 ", "Login", "Members")
+    }
+</div>
+<div id="DataList">
+    @Html.Action("MessageList", new { P_Id = ViewData["P_Id"] })
+</div>
+
+

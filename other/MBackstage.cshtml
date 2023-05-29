@@ -1,0 +1,49 @@
+﻿@model WebApplication8.ViewModel.UserB
+
+@using (Html.BeginForm("MBackstage", "Other"))
+{
+<table>
+    <tr>
+        <td>
+            帳號
+        </td>
+        <td>
+            姓名
+        </td>
+        <td>
+            信箱
+        </td>
+        <td>
+            權限
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Model.Account
+        </td>
+        <td>
+            @Model.Name
+        </td>
+        <td>
+            @Model.Email
+        </td>
+
+        @if (@Model.IsAdmin)
+        {
+            <td>管理者</td>
+        }
+        else
+        {
+            <td>一般使用者</td>
+        }
+    </tr>
+
+
+
+
+
+</table>
+
+
+
+}

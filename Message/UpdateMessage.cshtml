@@ -1,0 +1,42 @@
+﻿@model WebApplication8.Models.Message
+<script src="~/jQuery/Article/Article.js"></script>
+
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="form-horizontal">
+                @using (Html.BeginForm("UpdateMessage", "Message", new { P_Id = Model.P_Id, M_Id = Model.M_Id, Content = Model.Content }, FormMethod.Post))
+                {
+                    <h3 class="modal-title">
+                        修改留言
+                    </h3>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Account, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Model.Account
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CreateTime, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Model.CreateTime
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Content, new { @class = "col-xs-4 form-label" })
+                        <div class="col-xs-8">
+                            @Html.TextBoxFor(model => model.Content, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Content, null, new { @class = "label label-danger" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input class="btn btn-primary" id="editBtn" type="button" value=" 修改留言 " />
+            <input class="btn btn-danger" data-dismiss="modal" type="button"  value=" 取消 " onclick="close_modal();" />
+        </div>
+    </div>
+</div>

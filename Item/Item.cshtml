@@ -1,0 +1,248 @@
+﻿@model WebApplication8.Models.ItemDetailViewModel
+@{
+    ViewBag.Title = "商品資料-" + Model.Data.animal;
+}
+
+
+<br />
+<style>
+    body {
+        padding-top: 40px;
+    }
+
+    .content-block {
+        margin-top: 50px;
+        border-radius: 20px;
+        width: 1024px;
+    }
+
+
+    #EditArticleModal .modal-dialog {
+        border: 1px solid #fff;
+        border-radius: 20px;
+        padding: 10px;
+        background-color: #0c0d0d;
+        color: #fff;
+    }
+
+    #EditArticleModal .modal-content {
+        background-color: unset;
+    }
+
+    #EditArticleModal .form-control {
+        max-width: 250px !important;
+    }
+
+    .search-area .form-label {
+        word-break: keep-all;
+    }
+
+    #map {
+        width: 600px;
+        height: 500px;
+    }
+</style>
+
+
+<div class="row content-block bg-light mx-auto ">
+    <div class="col-12 p-3">
+        <div class="d-flex d-flex justify-content-around pt-4">
+            <div>
+                <img style="max-width: 300px; " class="mx-auto" src="@Html.Encode(Url.Content("~/Upload/" + Model.Data.Image))" />
+                <div class="text-card">
+                    <br>
+                    <table class="table table-striped">
+
+                        <tr>
+                            <td>性別：@Model.Data.Sex</td>
+                        </tr>
+                        <tr>
+                            <td>顏色：@Model.Data.Color</td>
+                        </tr>
+                        <tr>
+                            <td>品種：@Model.Data.Variety</td>
+                        </tr>
+                        <tr>
+                            <td>時間：@Model.Data.date.Year/@Model.Data.date.Month/@Model.Data.date.Day</td>
+                        </tr>
+                        <tr>
+                            <td>地點：<span id="addr">@Model.Data.Place</span></td>
+                        </tr>
+                        <tr>
+                            <td>手機：@Model.Data.Phone</td>
+                        </tr>
+                        <tr>
+                            <td>備註：@Model.Data.Remark</td>
+                        </tr>
+                    </table>
+
+                    @if (User.Identity.Name == Model.Data.Account)
+                    {
+
+                        
+                            @Ajax.ActionLink(" 修改文章 ", "EditPage", "Item", new { A_Id = Model.Data.Id },
+                                                                                              new AjaxOptions
+                                                                                              {
+                                                                                                  UpdateTargetId = "EditArticleModal",
+                                                                                                  InsertionMode = InsertionMode.Replace
+                                                                                              }, new { @class = "btn btn-info", @data_toggle = "modal", @data_target = "#EditArticleModal" })
+
+                        
+
+                        <div class="modal fade" id="EditArticleModal"
+                             tabindex="-8" role="dialog"
+                             aria-labelledby="CreateArticleModalLabel" ariahidden="true">
+                        </div>
+
+                        @Html.ActionLink(" 刪除文章 ", "Delete", "Item", new { Id = Model.Data.Id }, new { @class = "btn btn-danger" })
+                    }
+                    else
+                    {
+                        <br>
+                    }
+
+                </div>
+            </div>
+            <div>
+                <!--AIzaSyBrDGiYuX0pk1Lq232XmQYHM_dCRJfkMPo
+                <iframe width="500"
+                        height="450"
+                        frameborder="0"
+                        style="border:0"
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBrDGiYuX0pk1Lq232XmQYHM_dCRJfkMPo&q=@Model.Data.Place"
+                        allowfullscreen>
+                </iframe>-->
+                <div id="map"></div>
+                <div style="display:flex;justify-content:center;">
+                    <button id="getGeo" class="btn btn-info mr-3">規劃路線</button>
+                    <button id="getGeo_cancel" class="btn btn-danger ml-3">取消</button>
+                </div>
+                <div class="text-card">
+                    <div id="MessageList">
+                        @Html.Action("Index", "Message", new { P_Id = Model.Data.Id })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div>
+    <br>
+</div>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrDGiYuX0pk1Lq232XmQYHM_dCRJfkMPo&callback=initMap"></script>
+<script>
+    $(function () {
+        initMap();
+    })
+    $("#getGeo").click(function () {
+        if ($("#addr").text() == "") {
+            alert('尚無地址');
+        } else {
+            let res = get_location();
+            if (res.length) {
+                initMap(res[0], res[1]);
+            } else {
+                alert('查無地址');
+            }
+        }
+    });
+    $("#getGeo_cancel").click(function () {
+        initMap();
+    })
+
+    function get_location() {
+        let data = [];
+        let address = $("#addr").text();
+        let res = httpGet('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURI(address) + '&region=es&key=AIzaSyCaJbNcQmTMfYA8UJy6eOSC1k9PvsJPCco');
+        console.log('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURI(address) + '&region=es&key=AIzaSyCaJbNcQmTMfYA8UJy6eOSC1k9PvsJPCco')
+        if (typeof res.results[0].geometry.location.lat != 'undefined' && typeof res.results[0].geometry.location.lng != 'undefined') {
+            data = [res.results[0].geometry.location.lat, res.results[0].geometry.location.lng]
+        }
+        return data
+    }
+
+    function httpGet(theUrl) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl, false); // false for synchronous request
+        xmlHttp.send(null);
+        return JSON.parse(xmlHttp.responseText);
+    }
+
+    var map;
+    function initMap(target_lat, target_lng) {
+        target_lat = target_lat || '';
+        target_lng = target_lng || '';
+
+        // 載入路線服務與路線顯示圖層
+        var directionsService = new google.maps.DirectionsService();
+        var directionsDisplay = new google.maps.DirectionsRenderer();
+
+        if (!target_lat || !target_lng) {
+            // 初始化地圖
+            let res = get_location();
+
+            let pos = {
+                lat: res[0],
+                lng: res[1]
+            };
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: { lat: pos.lat, lng: pos.lng }
+            });
+
+            let marker = new google.maps.Marker({
+                position: pos,
+                map: this.map
+            });
+        } else {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+
+                    let pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    // 初始化地圖
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 15,
+                        center: { lat: pos.lat, lng: pos.lng }
+                    });
+
+                    let marker = new google.maps.Marker({
+                        position: pos,
+                        map: this.map
+                    });
+
+                    if (target_lat && target_lng) {
+                        // 放置路線圖層
+                        directionsDisplay.setMap(map);
+
+                        // 路線相關設定
+                        var request = {
+                            origin: { lat: pos.lat, lng: pos.lng },
+                            destination: { lat: target_lat, lng: target_lng },
+                            travelMode: 'DRIVING'
+                        };
+
+                        // 繪製路線
+                        directionsService.route(request, function (result, status) {
+                            console.log(status)
+                            if (status == 'OK') {
+                                // 回傳路線上每個步驟的細節
+                                console.log(result.routes[0].legs[0].steps);
+                                directionsDisplay.setDirections(result);
+                            } else {
+                                console.log(status);
+                            }
+                        });
+                    }
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                alert("未允許或遭遇錯誤！");
+            }
+        }
+    }</script>
